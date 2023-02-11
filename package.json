@@ -1,0 +1,66 @@
+{
+	"name": "@handwithfivefingers/twinmight-design",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/handwithfivefingers"
+	},
+	"version": "1.0.4",
+	"description": "TwinMight Components",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "rollup -c",
+		"storybook": "start-storybook -p 6006",
+		"build-storybook": "build-storybook"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/handwithfivefingers/TwintMight-Design.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/handwithfivefingers/TwintMight-Design/issues"
+	},
+	"homepage": "https://github.com/handwithfivefingers/TwintMight-Design#readme",
+	"devDependencies": {
+		"@babel/core": "^7.20.12",
+		"@rollup/plugin-commonjs": "^24.0.1",
+		"@rollup/plugin-node-resolve": "^15.0.1",
+		"@rollup/plugin-terser": "^0.4.0",
+		"@rollup/plugin-typescript": "^11.0.0",
+		"@storybook/addon-actions": "^6.5.16",
+		"@storybook/addon-essentials": "^6.5.16",
+		"@storybook/addon-interactions": "^6.5.16",
+		"@storybook/addon-links": "^6.5.16",
+		"@storybook/builder-webpack5": "^6.5.16",
+		"@storybook/manager-webpack5": "^6.5.16",
+		"@storybook/preset-scss": "^1.0.3",
+		"@storybook/react": "^6.5.16",
+		"@storybook/testing-library": "^0.0.13",
+		"@types/react": "^18.0.27",
+		"babel-loader": "^8.3.0",
+		"clsx": "^1.2.1",
+		"css-loader": "^6.7.3",
+		"jest-environment-jsdom": "^29.4.2",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"rollup": "^3.15.0",
+		"rollup-plugin-dts": "^5.1.1",
+		"rollup-plugin-postcss": "^4.0.2",
+		"sass": "^1.58.0",
+		"sass-loader": "^13.2.0",
+		"scss": "^0.2.4",
+		"style-loader": "^3.3.1",
+		"tslib": "^2.5.0",
+		"typescript": "^4.9.5"
+	},
+	"peerDependencies": {
+		"react": "^18.2.0",
+		"clsx": "^1.2.1"
+	},
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"files": [
+		"dist"
+	],
+	"types": "dist/index.d.ts"
+}
