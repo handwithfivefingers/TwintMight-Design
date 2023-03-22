@@ -1,0 +1,13 @@
+.d-flex {
+	display: flex;
+	gap: 12px;
+}
+
+.tm-form {
+	display: flex;
+	gap: 12px;
+	flex-direction: column;
+	button {
+		flex-shrink: 1;
+	}
+}

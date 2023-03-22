@@ -7,6 +7,7 @@ export interface ButtonProps {
 	type?: 'default' | 'primary' | 'ghost' | 'link';
 	className?: string;
 	style?: string | any;
+	htmlType?: 'button' | 'submit';
 	onClick?: (event: React.MouseEvent<HTMLElement>) => any | void;
 	onDoubleClick?: (event: React.MouseEvent<HTMLElement>) => any | void;
 }
@@ -14,10 +15,15 @@ export interface ButtonProps {
 const Button = ({
 	type = 'default',
 	className,
+	htmlType = 'button',
 	style,
 	...props
 }: ButtonProps) => {
 	const { children } = props;
+
+	const onClick = (e: any) => {
+		console.log(`onClick`, e);
+	};
 	return (
 		<button
 			className={clsx(className, 'tm-button', {
@@ -28,6 +34,8 @@ const Button = ({
 			})}
 			style={style}
 			{...props}
+			type={htmlType}
+			onClick={props.onClick}
 		>
 			{children}
 		</button>

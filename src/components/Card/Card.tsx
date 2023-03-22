@@ -1,11 +1,24 @@
 import React from 'react';
 import './Card.scss';
-export interface ButtonProps {
-	label: string;
+
+import CardDefault from './CardDefault/CardDefault';
+import CardPrimary from './CardPrimary/CardPrimary';
+export interface CardProps {
+	title?: JSX.Element | string;
+	image?: string;
+	children: JSX.Element | string;
+	type?: 'default' | 'primary' | 'full';
+	bottom?: any[];
 }
 
-const Card = (props: ButtonProps) => {
-	return <button className='tm-card'>{props.label}</button>;
+const Card = (props: CardProps) => {
+	const { type } = props;
+
+	if (type === 'primary') {
+		return <CardPrimary {...props} />;
+	}
+
+	return <CardDefault {...props} />;
 };
 
 export default Card;

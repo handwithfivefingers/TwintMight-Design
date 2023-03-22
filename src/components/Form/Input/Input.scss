@@ -1,0 +1,22 @@
+.tm-input-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	.tm-input-label {
+		label {
+			color: #333;
+		}
+	}
+	.tm-input {
+		input {
+			outline: none;
+			border: 1px solid #dadada;
+			padding: 6px 12px;
+			border-radius: 4px;
+			transition: border 0.2s;
+			&:focus {
+				border: 1px solid #1ea7fd;
+			}
+		}
+	}
+}
