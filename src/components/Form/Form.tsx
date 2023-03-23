@@ -1,5 +1,4 @@
-import React, { useRef, useImperativeHandle } from 'react';
-import clsx from 'clsx';
+import React, { useRef, useImperativeHandle, forwardRef } from 'react';
 import './Form.scss';
 import Button from '../Button';
 
@@ -88,9 +87,10 @@ const Form = ({ className, style, formValue = {}, ...props }: FormProps) => {
 	};
 
 	return (
-		<form className={clsx('tm-form')} onSubmit={onSubmit} ref={formRef}>
+		<form className={'tm-form'} onSubmit={onSubmit} ref={formRef}>
 			<div className='d-flex'>
 				{React.Children.map(children, (child, index) => {
+					console.log('child', children);
 					let pathName = child.props.name;
 					if (Array.isArray(pathName)) {
 						pathName = child.props.name.join('_');
@@ -113,5 +113,9 @@ const Form = ({ className, style, formValue = {}, ...props }: FormProps) => {
 		</form>
 	);
 };
+
+const FormItem = forwardRef((props: any, ref) => {
+	return props.children;
+});
 
 export default Form;

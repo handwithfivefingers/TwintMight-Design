@@ -14,6 +14,7 @@ const Template: ComponentStory<typeof Form> = (args) => {
 			<Input label='Username' name={['user', 'name']} />
 			<Input label='Password' name={['user', 'password']} />
 			<Input label='Password' name={'userid'} />
+			<button>helllo</button>
 		</Form>
 	);
 };
