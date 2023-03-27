@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import './Button.scss';
 
 export interface ButtonProps {
-	children: string | any | JSX.Element;
+	children?: string | any | JSX.Element;
 	type?: 'default' | 'primary' | 'ghost' | 'link';
 	className?: string;
 	style?: string | any;
@@ -21,9 +21,6 @@ const Button = ({
 }: ButtonProps) => {
 	const { children } = props;
 
-	const onClick = (e: any) => {
-		console.log(`onClick`, e);
-	};
 	return (
 		<button
 			className={clsx(className, 'tm-button', {

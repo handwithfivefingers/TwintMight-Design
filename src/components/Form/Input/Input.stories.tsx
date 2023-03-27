@@ -1,24 +1,25 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import Input from './Input';
 
 export default {
 	title: 'Form/Input',
 	component: Input,
-} as ComponentMeta<typeof Input>;
+} as Meta<typeof Input>;
 
-const Template: ComponentStory<typeof Input> = (args) => {
-	const handleChange = (e: any) => console.log(e);
-	return (
-		<>
-			<Input
-				{...args}
-				label='Username'
-				onChange={handleChange}
-				placeholder='Input value ....'
-			/>
-		</>
-	);
+const Template: StoryFn<typeof Input> = (args) => {
+	return <Input {...args} />;
 };
 
 export const Default = Template.bind({});
+export const NoProps = Template.bind({});
+
+Default.args = {
+	label: 'Label',
+	name: ['user', 'name'],
+	onChange: (value) => console.log('value', value),
+};
+
+NoProps.args = {
+	onChange: (value) => console.log('noProps', value),
+};

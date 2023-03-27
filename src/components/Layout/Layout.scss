@@ -1,0 +1,39 @@
+// folowing bootstrap breakpoint
+$XX: 1400px;
+$X: 1200px;
+$L: 992px;
+$M: 768px;
+$S: 576px;
+$ES: 576px;
+
+$XXScreen: 1320px;
+$XScreen: 1140px;
+$Lcreen: 960px;
+$Mcreen: 720px;
+$Screen: 540px;
+$EScreen: 100%;
+
+.tm-layout {
+	box-sizing: border-box;
+	margin-right: auto;
+	margin-left: auto;
+	width: 100%;
+	@media (max-width: $ES) {
+		max-width: $EScreen;
+	}
+	@media (min-width: $S) {
+		max-width: $Screen;
+	}
+	@media (min-width: $M) {
+		max-width: $Mcreen;
+	}
+	@media (min-width: $L) {
+		max-width: $Lcreen;
+	}
+	@media (min-width: $X) {
+		max-width: $XScreen;
+	}
+	@media (min-width: $XX) {
+		max-width: $XXScreen;
+	}
+}

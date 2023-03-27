@@ -1,18 +1,29 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React, {
+	forwardRef,
+	useImperativeHandle,
+	useState,
+	useRef,
+	useMemo,
+} from 'react';
 import './Input.scss';
 export interface InputProps {
 	label?: JSX.Element | string;
-	value?: string | number | [];
+	value?: string | number;
 	name?: string | any[string];
-	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any | void;
+	onChange?: (
+		value: string | number,
+		event: React.ChangeEvent<HTMLInputElement>
+	) => any | void;
 	placeholder?: string;
 }
 
 const Input = forwardRef((props: InputProps, ref: any) => {
+	const inputRef = ref || useRef<HTMLInputElement>();
 	const { value } = props;
 	const [inputValue, setInputValue] = useState(value || '');
+
 	useImperativeHandle(
-		ref,
+		inputRef,
 		() => {
 			return {
 				getValue: () => inputValue,
@@ -25,9 +36,16 @@ const Input = forwardRef((props: InputProps, ref: any) => {
 	);
 
 	const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setInputValue(event.target.value);
-		if (props.onChange) {
-			onChange(event);
+		try {
+			const { value } = event.target;
+			setInputValue(value);
+
+			if (props.onChange) {
+				props.onChange(value, event);
+			}
+		} catch (error) {
+			console.log('error');
+			throw error;
 		}
 	};
 
@@ -37,20 +55,33 @@ const Input = forwardRef((props: InputProps, ref: any) => {
 		}
 		return name;
 	};
+
+	const renderInput = useMemo(() => {
+		if (props.name) {
+			return (
+				<input
+					value={inputValue}
+					onChange={(event) => onChange(event)}
+					placeholder={props?.placeholder}
+					name={props?.name && getName(props?.name)}
+					ref={ref}
+				/>
+			);
+		}
+		return (
+			<input
+				value={inputValue}
+				onChange={(event) => onChange(event)}
+				placeholder={props?.placeholder}
+			/>
+		);
+	}, [inputValue, props]);
 	return (
 		<div className='tm-input-wrapper'>
 			<div className='tm-input-label'>
 				<label>{props?.label}</label>
 			</div>
-			<div className='tm-input'>
-				<input
-					value={inputValue}
-					onChange={onChange}
-					placeholder={props?.placeholder}
-					name={props?.name && getName(props?.name)}
-					ref={ref}
-				/>
-			</div>
+			<div className='tm-input'>{renderInput}</div>
 		</div>
 	);
 });
