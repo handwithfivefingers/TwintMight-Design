@@ -1,0 +1,87 @@
+$primary: #1ea7fd;
+$primaryOpacity: #d1eeff71;
+.tm-dropdown {
+    display: flex;
+    .tm-dropdown-wrapper {
+        position: relative;
+        .tm-dropdown-label {
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color, outline 0.2s ease-in-out;
+            outline: 2px solid transparent;
+            &:hover,
+            &.label-active {
+                @extend .active-bg;
+                outline: 2px solid $primary;
+            }
+            .tm-dropdown-caret {
+                padding-left: 20px;
+                display: flex;
+                svg {
+                    transition: transform 0.2s ease-in-out;
+                    transform: rotate(0deg);
+                }
+                &.caret-up {
+                    svg {
+                        @extend .rotation;
+                    }
+                }
+            }
+        }
+    }
+}
+.tm-dropdown-text {
+    border-color: transparent;
+}
+.tm-dropdown-outline {
+    border-color: transparent;
+}
+.tm-dropdown-default {
+    border-color: $primary;
+}
+.active-bg {
+    background-color: $primaryOpacity;
+}
+
+.rotation {
+    transform: rotate(180deg);
+}
+
+.tm-dropdown-popup {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: -1px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+    width: 100%;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+    @extend .shadow;
+
+    &.tm-dropdown-open {
+        opacity: 1;
+        visibility: visible;
+    }
+    .tm-dropdown-item {
+        padding: 6px 12px;
+        cursor: pointer;
+        &:not(:first-child) {
+            border-top: 1px solid #eee;
+        }
+        &:hover {
+            @extend .active-bg;
+        }
+    }
+}
+
+.shadow {
+    box-shadow: 0 2px 40px 0 rgb(0 0 0 / 10%);
+}

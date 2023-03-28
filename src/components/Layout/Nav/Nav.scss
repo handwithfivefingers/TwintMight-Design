@@ -1,0 +1,32 @@
+.tm-nav {
+    @extend .flex-start-center;
+    gap: 8px;
+
+    .tm-nav-brand {
+        padding: 8px;
+    }
+    .tm-nav-wrapper {
+        @extend .flex-start-center;
+    }
+}
+
+.flex-start-center {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.tm-nav-list {
+    display: flex;
+}
+.tm-nav-item {
+    display: flex;
+    font-size: 16px;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+    &.tm-nav-item-active {
+        color: rgb(60, 184, 255);
+    }
+}
