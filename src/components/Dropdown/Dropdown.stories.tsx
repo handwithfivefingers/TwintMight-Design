@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react'
+import Container from '../Layout/Container'
 import Dropdown from './Dropdown'
 import './Dropdown.stories.scss'
 
@@ -7,7 +8,24 @@ export default {
     component: Dropdown,
 } as Meta<typeof Dropdown>
 
-const Template: StoryFn<typeof Dropdown> = args => <Dropdown {...args} />
+const Template: StoryFn<typeof Dropdown> = args => {
+    return (
+        <Container>
+            <div>
+                <h3>Default</h3>
+                <Dropdown {...args} type="default" />
+            </div>
+            <div>
+                <h3>Outline</h3>
+                <Dropdown {...args} type="outline" />
+            </div>
+            <div>
+                <h3>Text</h3>
+                <Dropdown {...args} type="text" />
+            </div>
+        </Container>
+    )
+}
 
 export const Block = Template.bind({})
 

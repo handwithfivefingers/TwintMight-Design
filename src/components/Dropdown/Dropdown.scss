@@ -1,11 +1,20 @@
 $primary: #1ea7fd;
 $primaryOpacity: #d1eeff71;
+
+.active-bg {
+    background-color: $primaryOpacity;
+}
+
+.outline-color {
+    outline-color: $primary;
+}
+
 .tm-dropdown {
     display: flex;
     .tm-dropdown-wrapper {
         position: relative;
         .tm-dropdown-label {
-            border-width: 1px;
+            border-width: 2px;
             border-style: solid;
             border-radius: 4px;
             cursor: pointer;
@@ -14,12 +23,14 @@ $primaryOpacity: #d1eeff71;
             align-items: center;
             justify-content: space-between;
             transition: background-color, outline 0.2s ease-in-out;
-            outline: 2px solid transparent;
-            &:hover,
-            &.label-active {
-                @extend .active-bg;
-                outline: 2px solid $primary;
-            }
+            // outline: 2px solid transparent;
+            outline-width: 2px;
+            outline-style: solid;
+            // &:hover,
+            // &.label-active {
+            //     @extend .active-bg;
+            //     @extend .outline-color;
+            // }
             .tm-dropdown-caret {
                 padding-left: 20px;
                 display: flex;
@@ -36,17 +47,34 @@ $primaryOpacity: #d1eeff71;
         }
     }
 }
-.tm-dropdown-text {
+.tm-dropdown-default {
     border-color: transparent;
+    background-color: transparent;
+    outline-color: transparent;
+    &:hover,
+    &.label-active {
+        @extend .active-bg;
+        @extend .outline-color;
+    }
 }
+
 .tm-dropdown-outline {
     border-color: transparent;
+    outline-color: $primary;
+    &:hover,
+    &.label-active {
+        @extend .active-bg;
+        @extend .outline-color;
+    }
 }
-.tm-dropdown-default {
-    border-color: $primary;
-}
-.active-bg {
-    background-color: $primaryOpacity;
+
+.tm-dropdown-text {
+    border-color: transparent;
+    outline-color: transparent;
+    &:hover,
+    &.label-active {
+        @extend .active-bg;
+    }
 }
 
 .rotation {

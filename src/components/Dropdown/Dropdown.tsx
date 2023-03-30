@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import { BsFillCaretDownFill } from 'react-icons/bs'
+import { createPortal } from 'react-dom'
 import './Dropdown.scss'
 
 interface DropdownProps {
@@ -21,9 +22,7 @@ const Dropdown = (props: DropdownProps) => {
 
     const [openDropdown, setOpenDropdown] = useState<boolean>(false)
 
-    const popupCs = clsx(`tm-dropdown-popup `, popupClassName, {
-        ['tm-dropdown-open']: openDropdown,
-    })
+    const cursorRef = useRef<HTMLElement | any>(undefined)
 
     const closeDropdown = () => setOpenDropdown(false)
 
@@ -34,9 +33,50 @@ const Dropdown = (props: DropdownProps) => {
         }
     }
 
+    const renderPopup = useMemo(() => {
+        const popupCs = clsx(`tm-dropdown-popup`, popupClassName, {
+            ['tm-dropdown-open']: openDropdown,
+        })
+
+        const domRect = cursorRef.current?.getBoundingClientRect()
+        const listPopup = document.querySelectorAll('.tm-dropdown-popup')
+
+        if (!domRect) return
+
+        return createPortal(
+            <div
+                className={popupCs}
+                style={{
+                    top: `${domRect.bottom + 10}px`,
+                    left: `${domRect.left}px`,
+                    position: 'fixed',
+                    width: `${domRect.width}px`,
+                    zIndex: 1000 + listPopup.length,
+                    background: '#fff',
+                }}
+            >
+                {items.map((item: any, index: number) => {
+                    return (
+                        <div
+                            className={'tm-dropdown-item'}
+                            key={['tm-dropdown-item', item.label, index].join('_')}
+                            onClick={(event: React.MouseEvent) => handleSelectOption(item, event)}
+                        >
+                            {item.label}
+                        </div>
+                    )
+                })}
+            </div>,
+            document.body,
+        )
+    }, [openDropdown])
+    const handleClickDropdown = (event: React.MouseEvent | React.TouchEvent) => {
+        setOpenDropdown(!openDropdown)
+    }
+
     return (
         <div className={cx} style={style}>
-            <div className="tm-dropdown-wrapper" onClick={() => setOpenDropdown(!openDropdown)}>
+            <div className="tm-dropdown-wrapper" onClick={handleClickDropdown} ref={ref => (cursorRef.current = ref)}>
                 <div
                     className={clsx(`tm-dropdown-label tm-dropdown-${type || 'default'}`, {
                         ['label-active']: openDropdown,
@@ -51,19 +91,7 @@ const Dropdown = (props: DropdownProps) => {
                         <BsFillCaretDownFill />
                     </span>
                 </div>
-                <div className={popupCs}>
-                    {items.map((item: any, index: number) => {
-                        return (
-                            <div
-                                className={'tm-dropdown-item'}
-                                key={['tm-dropdown-item', item.label, index].join('_')}
-                                onClick={(event: React.MouseEvent) => handleSelectOption(item, event)}
-                            >
-                                {item.label}
-                            </div>
-                        )
-                    })}
-                </div>
+                {openDropdown && renderPopup}
             </div>
         </div>
     )
