@@ -2,6 +2,7 @@ import React, { useImperativeHandle, useRef } from 'react'
 import Input from './Input'
 import Select from './Select'
 import './Form.scss'
+import Checkbox from './Checkbox/Checkbox'
 export interface FormProps {
     children: string | any | JSX.Element
     className?: string
@@ -110,7 +111,7 @@ const Form = ({ className, style, formValue = {}, ...props }: FormProps) => {
 }
 
 Form.Input = Input
-
+Form.Checkbox = Checkbox
 Form.Select = Select
 
 export default Form

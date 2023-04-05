@@ -3,6 +3,7 @@ import { useState, useMemo, useRef } from 'react'
 import { BsFillCaretDownFill } from 'react-icons/bs'
 import { createPortal } from 'react-dom'
 import './Dropdown.scss'
+import { useIsomorphicLayoutEffect } from '../../utils/hook'
 
 interface DropdownProps {
     children?: React.ReactNode
@@ -23,6 +24,21 @@ const Dropdown = (props: DropdownProps) => {
     const [openDropdown, setOpenDropdown] = useState<boolean>(false)
 
     const cursorRef = useRef<HTMLElement | any>(undefined)
+
+    const dropdownRef = useRef<HTMLDivElement>(null)
+
+    useIsomorphicLayoutEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [dropdownRef])
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent | any) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            closeDropdown()
+        }
+    }
 
     const closeDropdown = () => setOpenDropdown(false)
 
@@ -54,6 +70,7 @@ const Dropdown = (props: DropdownProps) => {
                     zIndex: 1000 + listPopup.length,
                     background: '#fff',
                 }}
+                ref={dropdownRef}
             >
                 {items.map((item: any, index: number) => {
                     return (
