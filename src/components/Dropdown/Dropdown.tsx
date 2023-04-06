@@ -28,11 +28,15 @@ const Dropdown = (props: DropdownProps) => {
     const dropdownRef = useRef<HTMLDivElement>(null)
 
     useIsomorphicLayoutEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside)
+        if (openDropdown) {
+            document.addEventListener('mousedown', handleClickOutside)
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
         }
-    }, [dropdownRef])
+    }, [dropdownRef, openDropdown])
 
     const handleClickOutside = (event: MouseEvent | TouchEvent | any) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
