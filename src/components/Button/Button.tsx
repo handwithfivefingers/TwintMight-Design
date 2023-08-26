@@ -1,7 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
 import './Button.scss'
-import { addBindTo } from '../HOCs/ContextHoc'
 
 export interface ButtonProps {
     children?: string | any | JSX.Element

@@ -8,12 +8,12 @@ interface RowProps {
 
 const Row = ({ children, styles, gutter = [6, 6] }: RowProps) => {
     const style = {
-        '--gX': `${gutter[0]}px`,
-        '--gY': `${typeof gutter[1] !== 'undefined' ? gutter[1] : gutter[0]}px`,
+        '--tm-gutter-x': `${gutter[0]}px`,
+        '--tm-gutter-y': `${typeof gutter[1] !== 'undefined' ? gutter[1] : gutter[0]}px`,
         ...styles,
     }
     return (
-        <div className="row" style={style}>
+        <div className="tm-row" style={style}>
             {children}
         </div>
     )

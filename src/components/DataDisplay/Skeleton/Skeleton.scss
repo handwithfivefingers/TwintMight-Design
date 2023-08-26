@@ -1,0 +1,158 @@
+$primary: #1ea7fd;
+$primaryOpacity: #d1eeff71;
+
+// .active-bg {
+//     background-color: $primaryOpacity;
+// }
+
+// .outline-color {
+//     outline-color: $primary;
+// }
+
+// .tm-dropdown {
+//     display: flex;
+//     .tm-dropdown-wrapper {
+//         position: relative;
+//         .tm-dropdown-label {
+//             border-width: 2px;
+//             border-style: solid;
+//             border-radius: 4px;
+//             cursor: pointer;
+//             padding: 6px 12px;
+//             display: flex;
+//             align-items: center;
+//             justify-content: space-between;
+//             transition: background-color, outline 0.2s ease-in-out;
+//             // outline: 2px solid transparent;
+//             outline-width: 2px;
+//             outline-style: solid;
+//             // &:hover,
+//             // &.label-active {
+//             //     @extend .active-bg;
+//             //     @extend .outline-color;
+//             // }
+//             .tm-dropdown-caret {
+//                 padding-left: 20px;
+//                 display: flex;
+//                 svg {
+//                     transition: transform 0.2s ease-in-out;
+//                     transform: rotate(0deg);
+//                 }
+//                 &.caret-up {
+//                     svg {
+//                         @extend .rotation;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// .tm-dropdown-default {
+//     border-color: transparent;
+//     background-color: transparent;
+//     outline-color: transparent;
+//     &:hover,
+//     &.label-active {
+//         @extend .active-bg;
+//         @extend .outline-color;
+//     }
+// }
+
+// .tm-dropdown-outline {
+//     border-color: transparent;
+//     outline-color: $primary;
+//     &:hover,
+//     &.label-active {
+//         @extend .active-bg;
+//         @extend .outline-color;
+//     }
+// }
+
+// .tm-dropdown-text {
+//     border-color: transparent;
+//     outline-color: transparent;
+//     &:hover,
+//     &.label-active {
+//         @extend .active-bg;
+//     }
+// }
+
+// .rotation {
+//     transform: rotate(180deg);
+// }
+
+// .tm-dropdown-popup {
+//     position: absolute;
+//     top: calc(100% + 8px);
+//     right: -1px;
+//     opacity: 0;
+//     visibility: hidden;
+//     transition: opacity 0.2s ease-in-out;
+//     width: 100%;
+//     border-radius: 4px;
+//     box-sizing: border-box;
+
+//     @extend .shadow;
+
+//     &.tm-dropdown-open {
+//         opacity: 1;
+//         visibility: visible;
+//     }
+//     .tm-dropdown-item {
+//         padding: 6px 12px;
+//         cursor: pointer;
+//         &:not(:first-child) {
+//             border-top: 1px solid #eee;
+//         }
+//         &:hover {
+//             @extend .active-bg;
+//         }
+//     }
+// }
+
+// .shadow {
+//     box-shadow: 0 2px 40px 0 rgb(0 0 0 / 10%);
+// }
+
+.tm-skeleton {
+    display: block;
+    width: 100%;
+    .tm-skeleton-default {
+        padding: 20px 12px;
+        border-radius: 4px;
+        background: rgba(215, 215, 215, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    .tm-skeleton-paragraph {
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        li {
+            width: 100%;
+            height: 14px;
+            &:last-child {
+                width: 65%;
+            }
+        }
+    }
+    .tm-skeleton-active {
+        animation: slideAutomation 1.4s ease 0s infinite forwards;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%);
+        background-size: 400% 100%;
+        border-radius: 4px;
+    }
+}
+
+@keyframes slideAutomation {
+    from {
+        background-position: 100% 50%;
+    }
+    to {
+        background-position: 0% 50%;
+    }
+}

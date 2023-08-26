@@ -2,13 +2,16 @@ import { Meta, StoryFn } from '@storybook/react'
 import Container from '../Layout/Container'
 import Dropdown from './Dropdown'
 import './Dropdown.stories.scss'
-
+import theme from '../theme'
 export default {
     title: 'Layout/Dropdown',
     component: Dropdown,
 } as Meta<typeof Dropdown>
 
 const Template: StoryFn<typeof Dropdown> = args => {
+    const value = theme.useProviderData()
+
+    console.log('value', value)
     return (
         <Container>
             <div>

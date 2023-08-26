@@ -21,8 +21,8 @@ export const CardDefault = Template.bind({})
 export const CardPrimary = Template.bind({})
 
 CardDefault.args = {
-    image: 'https://truyenmai.com/wp-content/uploads/2019/10/how-to-optimize-images-for-web-1-300x150.png',
-    title: 'Card Title',
+    image: 'https://api.truyenmai.com/public/truyenmai/2019/09/serie-css.png',
+    title: 'Transition – Thủ thuật CSS – 2',
     children: (
         <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the

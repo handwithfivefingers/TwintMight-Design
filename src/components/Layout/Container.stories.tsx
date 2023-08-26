@@ -22,13 +22,13 @@ const GridRow: StoryFn<typeof Row> = args => {
     return (
         <Container className="shadow br-4 box">
             <Row {...args}>
-                <Col lg={4} md={6} sm={12} xs={12} className="box-blue p-2">
+                <Col lg={4} md={6} sm={12} xs={12} className="box-blue">
                     Col-lg-4 col-md-6
                 </Col>
-                <Col lg={2} md={6} sm={12} xs={12} className="box-blue p-2">
+                <Col lg={2} md={6} sm={12} xs={12} className="box-blue">
                     Col-lg-2 col-md-6
                 </Col>
-                <Col lg={4} md={12} sm={8} xs={12} className="box-blue p-2">
+                <Col lg={4} md={12} sm={8} xs={12} className="box-blue">
                     Col-lg-4 col-md-12
                 </Col>
             </Row>
@@ -38,7 +38,6 @@ const GridRow: StoryFn<typeof Row> = args => {
 
 const NavTemplate: StoryFn<typeof Nav> = args => {
     const [active, setActive] = useState<string | number>('/1')
-
     const innerNavbar = useMemo(() => {
         return (
             <>

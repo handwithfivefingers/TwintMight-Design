@@ -1,7 +1,4 @@
-import { useIsomorphicLayoutEffect } from './hook';
+export { default as useIsomorphicLayoutEffect } from './hook/useIsomorphicLayoutEffect'
 
-import { addProperty, getDeepObject } from './helper';
-
-const Utils = { addProperty, getDeepObject, useIsomorphicLayoutEffect };
-
-export default Utils;
+export { default as addProperty } from './helper/addProperty'
+export { default as getDeepObject } from './helper/getDeepObject'

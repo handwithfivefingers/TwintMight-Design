@@ -3,9 +3,9 @@ import { useState, useMemo, useRef } from 'react'
 import { BsFillCaretDownFill } from 'react-icons/bs'
 import { createPortal } from 'react-dom'
 import './Dropdown.scss'
-import { useIsomorphicLayoutEffect } from '../../utils/hook'
+import { useIsomorphicLayoutEffect } from '../../utils'
 
-interface DropdownProps {
+interface IDropdown {
     children?: React.ReactNode
     className?: string
     style?: React.CSSProperties | {}
@@ -15,8 +15,10 @@ interface DropdownProps {
     onSelect?: (value: any, event: React.MouseEvent) => void
     type?: 'outline' | 'default' | 'text'
 }
-const Dropdown = (props: DropdownProps) => {
+
+const Dropdown = (props: IDropdown) => {
     const { style, className, listItems, popupClassName, label, onSelect, type } = props
+
     const items = listItems || []
 
     const cx = clsx(`tm-dropdown `, className)
@@ -27,24 +29,53 @@ const Dropdown = (props: DropdownProps) => {
 
     const dropdownRef = useRef<HTMLDivElement>(null)
 
+    const callbackRef = useRef<any>({
+        scrollEvent: null,
+    })
+
     useIsomorphicLayoutEffect(() => {
-        if (openDropdown) {
-            document.addEventListener('mousedown', handleClickOutside)
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside)
+        if (dropdownRef.current) {
+            if (openDropdown) {
+                document.addEventListener('mousedown', handleClickOutside)
+                document.addEventListener('scroll', handleUpdatePosition)
+            } else {
+                document.removeEventListener('mousedown', handleClickOutside)
+            }
         }
+
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
+            document.removeEventListener('scroll', handleUpdatePosition)
         }
-    }, [dropdownRef, openDropdown])
+    }, [dropdownRef.current, openDropdown])
+
+    const handleUpdatePosition = (event: MouseEvent | TouchEvent | EventListener | Event): void => {
+        if (callbackRef.current.scrollEvent) {
+            clearTimeout(callbackRef.current.scrollEvent)
+        }
+        callbackRef.current.scrollEvent = setTimeout(() => {
+            const domRect = getDropdownPos()
+            if (dropdownRef.current) {
+                dropdownRef.current.style.top = `${domRect?.bottom + 10}px`
+                dropdownRef.current.style.left = `${domRect?.left}px`
+                dropdownRef.current.style.width = `${domRect?.width}px`
+            }
+        }, 25)
+    }
 
     const handleClickOutside = (event: MouseEvent | TouchEvent | any) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target) &&
+            !cursorRef.current.contains(event.target)
+        ) {
             closeDropdown()
         }
     }
 
-    const closeDropdown = () => setOpenDropdown(false)
+    const closeDropdown = () => {
+        setOpenDropdown(false)
+    }
 
     const handleSelectOption = (value: any, event: React.MouseEvent) => {
         closeDropdown()
@@ -53,14 +84,26 @@ const Dropdown = (props: DropdownProps) => {
         }
     }
 
+    const getDropdownPos = () => {
+        if (cursorRef.current) {
+            const { bottom, left, width } = cursorRef.current?.getBoundingClientRect()
+            return { bottom, left, width }
+        }
+        return undefined
+    }
+
+    const handleClickDropdown = (event: React.MouseEvent | React.TouchEvent) => {
+        console.log(event)
+        setOpenDropdown(!openDropdown)
+    }
+
     const renderPopup = useMemo(() => {
         const popupCs = clsx(`tm-dropdown-popup`, popupClassName, {
             ['tm-dropdown-open']: openDropdown,
         })
 
-        const domRect = cursorRef.current?.getBoundingClientRect()
+        const domRect = getDropdownPos()
         const listPopup = document.querySelectorAll('.tm-dropdown-popup')
-
         if (!domRect) return
 
         return createPortal(
@@ -91,9 +134,6 @@ const Dropdown = (props: DropdownProps) => {
             document.body,
         )
     }, [openDropdown])
-    const handleClickDropdown = (event: React.MouseEvent | React.TouchEvent) => {
-        setOpenDropdown(!openDropdown)
-    }
 
     return (
         <div className={cx} style={style}>

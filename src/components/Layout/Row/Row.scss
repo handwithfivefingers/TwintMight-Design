@@ -1,9 +1,9 @@
-.row {
-	$gutterX: var(--gX);
-	$gutterY: var(--gY);
-	display: flex;
-	flex-direction: row;
-	row-gap: $gutterY;
-	column-gap: $gutterX;
-	flex-wrap: wrap;
+.tm-row {
+    $gutterX: var(--tm-gutter-x);
+    $gutterY: var(--tm-gutter-y);
+    display: flex;
+    flex-direction: row;
+    row-gap: $gutterY;
+    column-gap: $gutterX;
+    flex-wrap: wrap;
 }
