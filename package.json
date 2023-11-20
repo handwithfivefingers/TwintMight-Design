@@ -33,6 +33,7 @@
         "clsx": "^1.2.1",
         "react": ">=16.9.0",
         "react-dom": ">=16.9.0",
+        "react-hook-form": "^7.48.2",
         "react-icons": "^4.8.0"
     },
     "peerDependencies": {
